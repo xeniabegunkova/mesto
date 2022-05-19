@@ -1,0 +1,17 @@
+.popup__input {
+    border: none;
+    min-height: 27px;
+    /*width: 358px;*/
+    margin-left: 36px;
+    margin-right: 36px;
+}
+
+
+@media screen and (max-width: 767px) {
+    .popup__title {
+        margin-left: 22px;
+        margin-right: 22px;
+        /*width: 238px;*/
+        min-height: 14px;
+    }
+}

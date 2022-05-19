@@ -1,0 +1,8 @@
+.photos__container {
+    display: grid;
+    background-image: url(../../../images/Pic1.png);
+    z-index: 0;
+    background-repeat: no-repeat;
+    width: 282px;
+    margin: auto;
+}
