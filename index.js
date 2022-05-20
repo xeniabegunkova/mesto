@@ -9,10 +9,10 @@ console.log(closePopupButton);
 
 
 editButton.addEventListener('click', function() {
-    popup.classList.add('popup__isOpen');
+    popup.classList.add('popup_isOpen');
 });
 
 
 closePopupButton.addEventListener('click', function() {
-    popup.classList.remove('popup__isOpen');
+    popup.classList.remove('popup_isOpen');
 });
