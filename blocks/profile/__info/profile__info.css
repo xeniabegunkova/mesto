@@ -7,6 +7,10 @@
     row-gap: 16px;
     align-items: center;
     align-content: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 336px; 
 }
 
 @media screen and (max-width: 1073px) {
@@ -16,6 +20,5 @@
         row-gap: 14px;
         justify-content: center;
         margin-bottom: 36px;
-        align-items: center;
     }
 }
