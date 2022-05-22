@@ -1,6 +1,10 @@
 .photos__container {
     display: grid;
-    background-image: url(../../../images/Pic1.png);
+    background-color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
     z-index: 0;
     background-repeat: no-repeat;
     width: 282px;

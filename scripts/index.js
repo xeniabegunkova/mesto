@@ -13,14 +13,13 @@ editButton.addEventListener('click', function() {
     workElement.value = careerElemnt.textContent;
 });
 
-
 closePopupButton.addEventListener('click', function() {
     popup.classList.remove('popup_is-open');
 });
 
 formElement.addEventListener('submit', function(event) {
-    console.log(event);
     event.preventDefault()
     titleElement.textContent = nameElement.value;
     careerElemnt.textContent = workElement.value;
+    popup.classList.remove('popup_is-open');
 })

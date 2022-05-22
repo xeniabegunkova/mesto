@@ -9,7 +9,7 @@
     font-size: 14px;
     line-height: 17px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    border-top: 13px;
+    padding-bottom: 8px;
     margin-top: 30px;
     outline: none;
 }
@@ -18,11 +18,9 @@
     margin-top: 0;
 }
 
-
 @media screen and (max-width: 767px) {
-    .popup__title {
+    .popup__input {
         margin-left: 22px;
         margin-right: 22px;
-        min-height: 14px;
     }
 }
