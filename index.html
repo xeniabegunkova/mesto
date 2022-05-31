@@ -32,54 +32,7 @@
         </section>
 
         <section class="photos">
-            <article class="photos__container">
-                <img src="./images/kirill-pershin-1088404-1.jpg" alt="Природа" class="photos__grid">
-                <div class="photos__information">
-                    <h2 class="photos__title">Карачаевск</h2>
-                    <button class="photos__like" type="button" aria-label="Нравится">
-                    </button>
-                </div>
-            </article>
-            <article class="photos__container">
-                <img src="./images/kirill-pershin-1404681-2.png" alt="Природа" class="photos__grid">
-                <div class="photos__information">
-                    <h2 class="photos__title">Гора Эльбрус</h2>
-                    <button class="photos__like" type="button" aria-label="Нравится">
-                    </button>
-                </div>
-            </article>
-            <article class="photos__container">
-                <img src="./images/kirill-pershin-1556355-3.png" alt="Природа" class="photos__grid">
-                <div class="photos__information">
-                    <h2 class="photos__title">Домбай</h2>
-                    <button class="photos__like" type="button" aria-label="Нравится">
-                    </button>
-                </div>
-            </article>
-            <article class="photos__container">
-                <img src="./images/kirill-pershin-1404681-2.png" alt="Природа" class="photos__grid">
-                <div class="photos__information">
-                    <h2 class="photos__title">Гора Эльбрус</h2>
-                    <button class="photos__like" type="button" aria-label="Нравится">
-                    </button>
-                </div>
-            </article>
-            <article class="photos__container">
-                <img src="./images/kirill-pershin-1556355-3.png" alt="Природа" class="photos__grid">
-                <div class="photos__information">
-                    <h2 class="photos__title">Домбай</h2>
-                    <button class="photos__like" type="button" aria-label="Нравится">
-                    </button>
-                </div>
-            </article>
-            <article class="photos__container">
-                <img src="./images/kirill-pershin-1088404-1.jpg" alt="Природа" class="photos__grid">
-                <div class="photos__information">
-                    <h2 class="photos__title">Карачаево-Черкесси</h2>
-                    <button class="photos__like" type="button" aria-label="Нравится">
-                    </button>
-                </div>
-            </article>
+            <div class="photos__list"></div>
         </section>
     </main>
 
@@ -87,20 +40,51 @@
         <p class="footer__text">&copy; 2022 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <!--popup for changing profile-->
+    <div class="popup" id="change-profile-popup">
         <div class="popup__content">
             <button class="popup__close" type="button" aria-label="Закрыть"></button>
             <h3 class="popup__title">Редактировать профиль</h3>
             <form action="#" class="popup__form" name="information">
                 <input type="text" required class="popup__input popup__input_sign_name" placeholder="Имя" name="name">
-                <input type="text" required class="popup__input popup__input_sign_work" placeholder="Профессия" name="career">
+                <input type="text" required class="popup__input popup__input_sign_extra" placeholder="Профессия"
+                    name="career">
                 <button type="submit" class="popup__button">Сохранить</button>
             </form>
         </div>
     </div>
 
+    <!--popup for changing cards-->
+    <div class="popup" id="change-card-popup">
+        <div class="popup__content">
+            <button class="popup__close" type="button" aria-label="Закрыть" id="close-button"></button>
+            <h3 class="popup__title" id="card-title">Новое место</h3>
+            <form action="#" class="popup__form" name="information" id="popup-form-card">
+                <input type="text" required class="popup__input popup__input_sign_appellation" placeholder="Название"
+                    name="name">
+                <input type="text" required class="popup__input popup__input_sign_link" placeholder="Ссылка на картинку"
+                    name="link">
+                <button type="submit" class="popup__button" id="close-button">Создать</button>
+            </form>
+        </div>
+    </div>
+
+    <!--added photos with help of js-->
+    <template id="photos-template">
+        <article class="photos__container">
+            <div class="grid__container">
+                <img class="photos__grid" alt="Природа" src="#">
+                <button class="photos__delete" type="button" aria-label="Удалить"></button>
+            </div>
+            <div class="photos__information">
+                <h2 class="photos__title"></h2>
+                <button class="photos__like" type="button" aria-label="Нравится"></button>
+            </div>
+        </article>
+    </template>
+
     <script src="./scripts/index.js"></script>
 
-    </body>
+</body>
 
 </html>

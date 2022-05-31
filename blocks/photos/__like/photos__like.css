@@ -17,8 +17,3 @@
     opacity: 0.5;
     cursor: pointer;
 }
-
-.photos__like:active {
-    background-image: url(../../../images/Active.svg);
-    opacity: 1;
-} 
