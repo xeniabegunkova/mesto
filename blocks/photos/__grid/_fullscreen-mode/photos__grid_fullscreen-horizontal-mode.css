@@ -1,0 +1,13 @@
+.photos__grid_fullscreen-horizontal-mode {
+    max-width: 75vw;
+    max-height: 75vh;
+    width: 816px;
+    height: 540px;
+    cursor: initial;
+}
+
+@media screen and (max-width: 980.2px) {
+    .photos__grid_fullscreen-horizontal-mode {
+        height: 299px;
+    }
+}

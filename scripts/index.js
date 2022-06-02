@@ -20,15 +20,14 @@ const photoTitle = document.querySelector('.photos__title');
 const photoAddButton = document.querySelector('.popup__button');
 
 /*editButton*/
-
-editButton.addEventListener('click', function() {
+editButton.addEventListener('click', function(e) {
     popupProfile.classList.add('popup_is-open');
     nameElement.value = titleElement.textContent;
     workElement.value = careerElemnt.textContent;
     e.preventDefault()
 });
 
-closePopupButton.addEventListener('click', function() {
+closePopupButton.addEventListener('click', function(e) {
     popupProfile.classList.remove('popup_is-open');
     e.preventDefault()
 });
@@ -37,24 +36,28 @@ formElement.addEventListener('submit', function(event) {
     titleElement.textContent = nameElement.value;
     careerElemnt.textContent = workElement.value;
     popupProfile.classList.remove('popup_is-open');
-    e.preventDefault();
+    event.preventDefault();
 })
 
 /*addButton*/
 
-addButton.addEventListener('click', function() {
+addButton.addEventListener('click', function(e) {
     popupCard.classList.add('popup_is-open');
-    e.preventDefault()
+    appellationCard.value = photoTitle.textContent;
+    linkCard.value = photoGrid.textContent;
+    e.preventDefault();
 });
 
-closeButton.addEventListener('click', function() {
+closeButton.addEventListener('click', function(e) {
     popupCard.classList.remove('popup_is-open');
-    e.preventDefault()
+    e.preventDefault();
 });
 
 formElementСard.addEventListener('submit', function(event) {
+    photoTitle.textContent = appellationCard.value;
+    photoGrid.textContent = linkCard.value;
     popupCard.classList.remove('popup_is-open');
-    e.preventDefault()
+    event.preventDefault();
 })
 
 /*cards*/
@@ -89,9 +92,9 @@ const initialCards = [
 /*add cards*/
 
 const photosPart = document.querySelector('.photos');
-const photosList = document.querySelector('.photos__list');
 const photosContainer = document.querySelector('.photos__container');
 const photosTemplate = document.querySelector('#photos-template').content;
+const photosList =  document.querySelector('.photos__list');
 
 const photosInformation = initialCards.map(function (item) {
     return {
@@ -109,31 +112,6 @@ function renderCard({ name, link }) {
     photosContainer.querySelector('.photos__title').textContent = name;
     photosContainer.querySelector('.photos__grid').src = link;
     photosList.prepend(photosContainer);
-    
-    /*добавление карточек*/
-
-    const createCardElem = (title, link) => {
-        const cardElem = photosTemplate.content.querySelector('.photos__container').cloneNode(true);
-
-        cardElem.querySelector('.photos__grid').setAttribute('src', `$(link)`);
-        cardElem.querySelector('.photos__grid').setAttribute('alt', `$(title))`);
-        cardElem.querySelector('.photos__title').textContent = title;
-
-        addCardListeners(cardElem);
-
-        return cardElem;
-    }
-
-    const addCard = (title, link) => {
-    const cardElem = createCardElement (title, link);
-    photosContainer.prepend(cardElem);
-    };
-    
-    const photoAddButton = e => {
-        e.preventDefault();
-        const title = popup__input_sign_appellation.value;
-        const link = popup__input_sign_link.value;
-    };
 
     /*удаление карточек*/
     photosPart.querySelector('.photos__delete').addEventListener('click', e => {
@@ -146,8 +124,25 @@ function renderCard({ name, link }) {
         e.target.classList.toggle('photos__like_active');
     });
 }
-
 render();
+
+/*добавление новых карточек */
+const addCard = document.querySelector('#popup-form-card')
+    const titleNewCard = document.querySelector('.popup__input_sign_appellation')
+    const linkNewCard = document.querySelector('.popup__input_sign_link')
+    addCard.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const cloneCard = photosTemplate.querySelector('.photos__container').cloneNode(true);
+        photosList.prepend(cloneCard);
+        cloneCard.querySelector('.photos__grid').src = linkNewCard.value;
+        cloneCard.querySelector('.photos__title').textContent = titleNewCard.value;
+        cloneCard.querySelector('.photos__like').addEventListener('click', function (e) {
+            e.target.classList.toggle('photos__like_active')});
+        cloneCard.querySelector('.photos__delete').addEventListener('click', e => {
+            const photosPart = e.currentTarget.closest('.photos__container');
+            photosPart.remove(); });
+    });
+    
 
 
 

@@ -5,10 +5,17 @@
     height: 19px;
     background-color: transparent;
     transition: opacity .4s ease-in-out;
-    margin-top: 20px;
-    margin-left: -40px;
     border: none;
     outline: none;
+    padding: 0;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
 }
 
 .photos__delete:hover {

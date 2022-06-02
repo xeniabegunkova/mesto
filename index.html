@@ -29,6 +29,7 @@
             <button class="profile__add-button" type="button" aria-label="Добавить">
                 <img src="./images/Vector.svg" class="profile__pic" alt="Кнопка плюс">
             </button>
+            </div>
         </section>
 
         <section class="photos">
@@ -72,16 +73,23 @@
     <!--added photos with help of js-->
     <template id="photos-template">
         <article class="photos__container">
-            <div class="grid__container">
-                <img class="photos__grid" alt="Природа" src="#">
-                <button class="photos__delete" type="button" aria-label="Удалить"></button>
-            </div>
+            <img class="photos__grid" alt="Фото" src="">
+            <button class="photos__delete" type="button" aria-label="Удалить"></button>
             <div class="photos__information">
                 <h2 class="photos__title"></h2>
                 <button class="photos__like" type="button" aria-label="Нравится"></button>
             </div>
         </article>
     </template>
+
+    <!--open popup photos-->
+    <div class="popup" id="change-item-popup">
+        <div class="popup__content popup__content_image">
+            <img alt="" src="" class="popup__image">
+            <h2 class="image__title"></h2>
+            <button class="popup__close" type="button" aria-label="Закрыть" id="close-button-item"></button> 
+        </div>
+    </div>
 
     <script src="./scripts/index.js"></script>
 

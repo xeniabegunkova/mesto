@@ -6,9 +6,10 @@
     grid-gap: 20px 17px;  
 } 
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 980.2px) {
     .photos__list {
         row-gap: 20px;
         column-gap: 0;
+        margin: auto;
     }
 }

@@ -2,3 +2,11 @@
     margin: 0;
     padding: 0;
 }
+
+@media screen and (max-width: 980.2px) {
+    .photos {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
