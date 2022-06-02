@@ -7,19 +7,18 @@ const nameElement = document.querySelector('.popup__input_sign_name');
 const careerElemnt = document.querySelector('.profile__career');
 const workElement = document.querySelector('.popup__input_sign_extra');
 const formElement = document.querySelector('.popup__form');
-
 /*for addButtoon*/
 const addButton = document.querySelector('.profile__add-button');
 const popupCard = document.querySelector('#change-card-popup');
 const closeButton = document.querySelector('#close-button')
 const appellationCard = document.querySelector('.popup__input_sign_appellation');
 const linkCard = document.querySelector('.popup__input_sign_link');
-const formElementСard = document.querySelector('#card-title'); 
-const photoGrid = document.querySelector('.photos__grid');
-const photoTitle = document.querySelector('.photos__title');
+const formElementСard = document.querySelector('#popup-form-card'); 
 const photoAddButton = document.querySelector('.popup__button');
 
+
 /*editButton*/
+
 editButton.addEventListener('click', function(e) {
     popupProfile.classList.add('popup_is-open');
     nameElement.value = titleElement.textContent;
@@ -43,22 +42,21 @@ formElement.addEventListener('submit', function(event) {
 
 addButton.addEventListener('click', function(e) {
     popupCard.classList.add('popup_is-open');
-    appellationCard.value = photoTitle.textContent;
-    linkCard.value = photoGrid.textContent;
-    e.preventDefault();
+    e.preventDefault()
 });
 
 closeButton.addEventListener('click', function(e) {
     popupCard.classList.remove('popup_is-open');
-    e.preventDefault();
+    e.preventDefault()
 });
 
 formElementСard.addEventListener('submit', function(event) {
-    photoTitle.textContent = appellationCard.value;
-    photoGrid.textContent = linkCard.value;
     popupCard.classList.remove('popup_is-open');
-    event.preventDefault();
-})
+    event.preventDefault()
+});
+
+/*openCard*/
+
 
 /*cards*/
 
@@ -143,6 +141,43 @@ const addCard = document.querySelector('#popup-form-card')
             photosPart.remove(); });
     });
     
+    /*open Cards*/
+
+    const imageElement = document.querySelector('#change-item-popup');
+    const imageClose = document.querySelector('#close-button-item');
+    const imageContainer = document.querySelector('.popup__content_image');
+    const popupImage = document.querySelector('.popup__image');
+    const photoGrid = document.querySelector('.photos__grid');
+    const photosTitle = document.querySelector('.photos__title');
+    const imageTitle = document.querySelector('.image__title');
+
+    imageContainer.addEventListener('click', function(e) {
+        imageElement.classList.add('popup_is-open');
+        imageTitle.value = photosTitle.textContent;
+        popupImage.value = photoGrid.textContent;
+        e.preventDefault()
+    });
+
+    imageClose.addEventListener('click', function(e) {
+        imageElement.classList.remove('popup_is-open');
+        e.preventDefault()
+    });
+
+    imageContainer.addEventListener('submit', function(event) {
+        photosTitle.textContent = imageTitle.value;
+        photoGrid.textContent = popupImage.value;  ит
+        photosContainer.classList.remove('popup_is-open');
+        event.preventDefault();
+    });
+
+    $('.photos__grid img').click(function() {
+        let src = $(this).attr('src');
+        $('.popup__image img').attr('src', src);
+        $('.popup__image img').fadeIn();    
+    });
+    $('#close-button-item').click(function() {
+        $('.change-item-popup').fadeOut();
+    });    
 
 
 
