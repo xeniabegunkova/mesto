@@ -32,7 +32,7 @@
 @import url(../blocks/popup/__image/_fullscreen-mode/_fullscreen-horizontal-mode/popup__image_fullscreen-horizontal-mode.css);
 @import url(../blocks/popup/__title-image/_fullscrean-modificator/popup__title-image_fullscrean-modificator.css);
 @import url(../blocks/popup/__content/_image/popup__content_image.css);
-@import url(../blocks/popup/__change_item/popup__change_item.css);
+@import url(../blocks/popup/__change/_item/popup__change_item.css);
 
 @import url(../blocks/photos/photos.css);
 @import url(../blocks/photos/__like/photos__like.css);
