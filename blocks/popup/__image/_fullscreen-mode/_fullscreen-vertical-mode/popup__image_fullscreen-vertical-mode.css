@@ -1,0 +1,14 @@
+.popup__image_fullscreen-vertical-mode {
+    width: 433px;
+    height: 540px;
+    /*max-width: 75vw;
+    max-height: 75vh;*/
+    cursor: initial;
+}
+
+@media screen and (max-width: 980.2px) {
+    .popup__image_fullscreen-vertical-mode {
+        width: 240px;
+        height: 299px;
+    }
+}

@@ -1,5 +1,5 @@
 /*for editButton*/
-const editButton = document.querySelector('.profile__edit-button'); 
+const editButton = document.querySelector('.profile__edit-button');
 const popupProfile = document.querySelector('#change-profile-popup');
 const closePopupButton = document.querySelector('.popup__close');
 const titleElement = document.querySelector('.profile__name');
@@ -13,25 +13,25 @@ const popupCard = document.querySelector('#change-card-popup');
 const closeButton = document.querySelector('#close-button')
 const appellationCard = document.querySelector('.popup__input_sign_appellation');
 const linkCard = document.querySelector('.popup__input_sign_link');
-const formElementСard = document.querySelector('#popup-form-card'); 
+const formElementСard = document.querySelector('#popup-form-card');
 const photoAddButton = document.querySelector('.popup__button');
 
 
 /*editButton*/
 
-editButton.addEventListener('click', function(e) {
+editButton.addEventListener('click', function (e) {
     popupProfile.classList.add('popup_is-open');
     nameElement.value = titleElement.textContent;
     workElement.value = careerElemnt.textContent;
     e.preventDefault()
 });
 
-closePopupButton.addEventListener('click', function(e) {
+closePopupButton.addEventListener('click', function (e) {
     popupProfile.classList.remove('popup_is-open');
     e.preventDefault()
 });
 
-formElement.addEventListener('submit', function(event) {
+formElement.addEventListener('submit', function (event) {
     titleElement.textContent = nameElement.value;
     careerElemnt.textContent = workElement.value;
     popupProfile.classList.remove('popup_is-open');
@@ -40,17 +40,17 @@ formElement.addEventListener('submit', function(event) {
 
 /*addButton*/
 
-addButton.addEventListener('click', function(e) {
+addButton.addEventListener('click', function (e) {
     popupCard.classList.add('popup_is-open');
     e.preventDefault()
 });
 
-closeButton.addEventListener('click', function(e) {
+closeButton.addEventListener('click', function (e) {
     popupCard.classList.remove('popup_is-open');
     e.preventDefault()
 });
 
-formElementСard.addEventListener('submit', function(event) {
+formElementСard.addEventListener('submit', function (event) {
     popupCard.classList.remove('popup_is-open');
     event.preventDefault()
 });
@@ -62,37 +62,36 @@ formElementСard.addEventListener('submit', function(event) {
 
 const initialCards = [
     {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+        name: 'Архыз',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
     },
     {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+        name: 'Челябинская область',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
     },
     {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+        name: 'Иваново',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
     },
     {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+        name: 'Камчатка',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
     },
     {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+        name: 'Холмогорский район',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
     },
     {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+        name: 'Байкал',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
 ];
 
 /*add cards*/
 
 const photosPart = document.querySelector('.photos');
-const photosContainer = document.querySelector('.photos__container');
 const photosTemplate = document.querySelector('#photos-template').content;
-const photosList =  document.querySelector('.photos__list');
+const photosList = document.querySelector('.photos__list');
 
 const photosInformation = initialCards.map(function (item) {
     return {
@@ -126,58 +125,62 @@ render();
 
 /*добавление новых карточек */
 const addCard = document.querySelector('#popup-form-card')
-    const titleNewCard = document.querySelector('.popup__input_sign_appellation')
-    const linkNewCard = document.querySelector('.popup__input_sign_link')
-    addCard.addEventListener('submit', function(e) {
+const titleNewCard = document.querySelector('.popup__input_sign_appellation')
+const linkNewCard = document.querySelector('.popup__input_sign_link')
+addCard.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const cloneCard = photosTemplate.querySelector('.photos__container').cloneNode(true);
+    photosList.prepend(cloneCard);
+    const photo = cloneCard.querySelector('.photos__grid');
+    photo.src = linkNewCard.value;
+    cloneCard.querySelector('.photos__title').textContent = titleNewCard.value;
+    cloneCard.querySelector('.photos__like').addEventListener('click', function (e) {
+        e.target.classList.toggle('photos__like_active')
+    });
+    cloneCard.querySelector('.photos__delete').addEventListener('click', e => {
+        const photosPart = e.currentTarget.closest('.photos__container');
+        photosPart.remove();
+    })
+    setEventListenerToPhoto(photo);
+});
+
+/*open Cards*/
+const cards = document.querySelectorAll('.photos__container');
+const imageElement = document.querySelector('.popup__change-item');
+const imageClose = document.querySelector('#close-button-item');
+const imageContainer = document.querySelector('.popup__content_image');
+const popupImage = document.querySelector('.popup__image');
+const allPhotos = document.querySelectorAll('.photos__grid');
+const photosTitle = document.querySelector('.photos__title');
+const imageTitle = document.querySelector('.popup__title-image');
+
+const setEventListenerToPhoto = element => {
+    element.addEventListener('click', function (e) {
         e.preventDefault();
-        const cloneCard = photosTemplate.querySelector('.photos__container').cloneNode(true);
-        photosList.prepend(cloneCard);
-        cloneCard.querySelector('.photos__grid').src = linkNewCard.value;
-        cloneCard.querySelector('.photos__title').textContent = titleNewCard.value;
-        cloneCard.querySelector('.photos__like').addEventListener('click', function (e) {
-            e.target.classList.toggle('photos__like_active')});
-        cloneCard.querySelector('.photos__delete').addEventListener('click', e => {
-            const photosPart = e.currentTarget.closest('.photos__container');
-            photosPart.remove(); });
-    });
-    
-    /*open Cards*/
-
-    const imageElement = document.querySelector('#change-item-popup');
-    const imageClose = document.querySelector('#close-button-item');
-    const imageContainer = document.querySelector('.popup__content_image');
-    const popupImage = document.querySelector('.popup__image');
-    const photoGrid = document.querySelector('.photos__grid');
-    const photosTitle = document.querySelector('.photos__title');
-    const imageTitle = document.querySelector('.image__title');
-
-    imageContainer.addEventListener('click', function(e) {
+        const image = e.currentTarget.src;
+        const card = e.target.closest('.photos__container');
+        const title = card.querySelector('.photos__title').textContent;
+        
+        imageTitle.textContent = title;
+        popupImage.src = image;
         imageElement.classList.add('popup_is-open');
-        imageTitle.value = photosTitle.textContent;
-        popupImage.value = photoGrid.textContent;
-        e.preventDefault()
+        popupImage.className = 'popup__image'; //удаляет все предыдущие классы
+
+        if (popupImage.naturalHeight / popupImage.naturalWidth < 0.8) {
+            popupImage.classList.add('popup__image_fullscreen-horizontal-mode');
+        } else {
+            popupImage.classList.add('popup__image_fullscreen-vertical-mode');
+        }
+
+        imageTitle.classList.add('popup__title-image_fullscrean-modificator');
     });
+};
 
-    imageClose.addEventListener('click', function(e) {
-        imageElement.classList.remove('popup_is-open');
-        e.preventDefault()
-    });
+Array.from(allPhotos).forEach(photo => {
+    setEventListenerToPhoto(photo);
+});
 
-    imageContainer.addEventListener('submit', function(event) {
-        photosTitle.textContent = imageTitle.value;
-        photoGrid.textContent = popupImage.value;  ит
-        photosContainer.classList.remove('popup_is-open');
-        event.preventDefault();
-    });
-
-    $('.photos__grid img').click(function() {
-        let src = $(this).attr('src');
-        $('.popup__image img').attr('src', src);
-        $('.popup__image img').fadeIn();    
-    });
-    $('#close-button-item').click(function() {
-        $('.change-item-popup').fadeOut();
-    });    
-
-
-
+imageClose.addEventListener('click', function (e) {
+    imageElement.classList.remove('popup_is-open');
+    e.preventDefault()
+});
