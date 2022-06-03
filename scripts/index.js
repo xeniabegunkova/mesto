@@ -146,7 +146,7 @@ addCard.addEventListener('submit', function (e) {
 
 /*open Cards*/
 const cards = document.querySelectorAll('.photos__container');
-const imageElement = document.querySelector('.popup__change_item');
+const imageElement = document.querySelector('.popup__item');
 const imageClose = document.querySelector('#close-button-item');
 const imageContainer = document.querySelector('.popup__content_image');
 const popupImage = document.querySelector('.popup__image');
