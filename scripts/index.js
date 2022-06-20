@@ -7,6 +7,8 @@ const nameEditElement = document.querySelector('.popup__input_sign_name');
 const careerEditElemnt = document.querySelector('.profile__career');
 const workEditElement = document.querySelector('.popup__input_sign_extra');
 const formEditProfile = document.querySelector('.popup__form');
+const popups = document.querySelectorAll('.popup');
+
 /*for addButtoon*/
 const popupAddButton = document.querySelector('.profile__add-button');
 const popupAddCard = document.querySelector('#change-card-popup');
@@ -69,14 +71,48 @@ const imageTitle = document.querySelector('.popup__title-image');
 
 function openPopup(popupElement) {
     popupElement.classList.add('popup_is-open');
+    escapeKeyAdd();
+    closeOverlayAdd();
 };
 
 /*закрытие попапа*/
 
 function closePopup(popupElement) {
     popupElement.classList.remove('popup_is-open');
+    escapeKeyRemove();
+    closeOverlayRemove();
 };
 
+/*обработка нажатия на клавишу*/
+const escapeKey = e => {
+    if (e.key === 'Escape') {
+        popups.forEach(closePopup);
+    }
+};
+
+const escapeKeyRemove = () => {
+    document.removeEventListener('keydown', escapeKey);
+};
+
+const escapeKeyAdd = () => {
+    document.addEventListener('keydown', escapeKey);
+};
+
+/*обратока на экран*/
+
+const closeOverlay = e => {
+    if (e.target.classList.contains('popup')) {
+        popups.forEach(closePopup);
+    };
+};
+
+const closeOverlayAdd = () => {
+    document.addEventListener('click', closeOverlay);
+}
+
+const closeOverlayRemove = () => {
+    document.removeEventListener('click', closeOverlay);
+}
 
 /*editButton*/
 
@@ -91,10 +127,10 @@ closeEditButton.addEventListener('click', () =>
 );
 
 formEditProfile.addEventListener('submit', function (e) {
+    e.preventDefault();
     titleEditElement.textContent = nameEditElement.value;
     careerEditElemnt.textContent = workEditElement.value;
     closePopup(popupEditProfile);
-    e.preventDefault();
 });
 
 /*addButton*/
@@ -175,7 +211,7 @@ const openPhoto = e => {
     openPopup(imageElement);
 };
 
-initialCards.forEach((card) => {render(card)});
+initialCards.forEach((card) => { render(card) });
 
 /*add new cards*/
 
@@ -184,7 +220,8 @@ addCard.addEventListener('submit', function (e) {
     const newCard = { name: titleNewCard.value, link: linkNewCard.value };
     const createdCard = renderCard(newCard);
     addCardToContainer(createdCard);
+    formAddСard.reset();
+    const btnSubmitAddCard = formAddСard.querySelector(".popup__button");
+    btnSubmitAddCard.classList.add('popup__button_inactive');
+    btnSubmitAddCard.setAttribute('disabled', true);
 });
-
-
-
