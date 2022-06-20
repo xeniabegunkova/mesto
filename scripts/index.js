@@ -8,6 +8,7 @@ const careerEditElemnt = document.querySelector('.profile__career');
 const workEditElement = document.querySelector('.popup__input_sign_extra');
 const formEditProfile = document.querySelector('.popup__form');
 const popups = document.querySelectorAll('.popup');
+const formIncludesToEdit = document.querySelector('.popup__form_includes-to_edit');
 
 /*for addButtoon*/
 const popupAddButton = document.querySelector('.profile__add-button');
@@ -17,7 +18,6 @@ const formAddСard = document.querySelector('#popup-form-card');
 const photoAddButton = document.querySelector('.popup__button');
 
 /*добавление новых карточек */
-const addCard = document.querySelector('#popup-form-card');
 const titleNewCard = document.querySelector('.popup__input_sign_appellation');
 const linkNewCard = document.querySelector('.popup__input_sign_link');
 
@@ -117,6 +117,7 @@ const closeOverlayRemove = () => {
 /*editButton*/
 
 editButton.addEventListener('click', function () {
+    resetValidation(formIncludesToEdit);
     openPopup(popupEditProfile);
     nameEditElement.value = titleEditElement.textContent;
     workEditElement.value = careerEditElemnt.textContent;
@@ -215,7 +216,7 @@ initialCards.forEach((card) => { render(card) });
 
 /*add new cards*/
 
-addCard.addEventListener('submit', function (e) {
+popupAddCard.addEventListener('submit', function (e) {
     e.preventDefault();
     const newCard = { name: titleNewCard.value, link: linkNewCard.value };
     const createdCard = renderCard(newCard);
