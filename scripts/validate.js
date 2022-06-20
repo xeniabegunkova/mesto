@@ -6,7 +6,7 @@ const installation = {
     inactiveButtonClass: 'popup__button_inactive',
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__input_error-active',
-    errorSelector: '.popup__form_input-error',
+    errorSelector: '.popup__input-error',
     frErrorSelector: '-input-error',
 }
 
