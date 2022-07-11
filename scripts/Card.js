@@ -1,14 +1,14 @@
 export class Card {
     constructor(information, selector, openPhoto) {
-        this.name = information.name;
-        this.link = information.link;
-        this.selector = selector;
+        this._name = information.name;
+        this._link = information.link;
+        this._selector = selector;
         this._openPhoto = openPhoto;
     }
 
     _takeTemplate() {
         const createdCard = document
-            .querySelector(this.selector)
+            .querySelector(this._selector)
             .content
             .querySelector('.photos__container')
             .cloneNode(true);
@@ -19,16 +19,16 @@ export class Card {
     _setLayOut() {
         const image = this.element.querySelector(".photos__grid");
 
-        this.element.querySelector(".photos__title").textContent = this.name;
-        image.src = this.link;
+        this.element.querySelector(".photos__title").textContent = this._name;
+        image.src = this._link;
 
-        image.setAttribute("alt", `${this.name}`);
-        image.setAttribute("src", `${this.link}`);
+        image.setAttribute("alt", `${this._name}`);
+        image.setAttribute("src", `${this._link}`);
     }
 
     _setImageListener() {
         const image = this.element.querySelector(".photos__grid");
-        image.addEventListener('click', () => this._openPhoto(this.name, this.link));
+        image.addEventListener('click', () => this._openPhoto(this._name, this._link));
     }
 
     _setLikeListener() {
@@ -41,13 +41,12 @@ export class Card {
     };
 
     _setDeleteListener() {
-        const dlt = this.element.querySelector(".photos__delete");
-        dlt.addEventListener("click", () => this._removeCard(dlt));
+        const buttonDelete = this.element.querySelector(".photos__delete");
+        buttonDelete.addEventListener("click", () => this._removeCard(buttonDelete));
     }
 
     _removeCard(item) {
-        const photosPart = item.closest('.photos__container');
-        photosPart.remove();
+        this.element.remove();
     };
 
 

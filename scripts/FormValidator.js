@@ -14,27 +14,14 @@ export class FormValidator {
         this.buttonEl = this._formSelector.querySelector(this.submitButtonSelector);
     }
 
-    _resetValidation() {
-        console.log('reset');
-        //const inputList = (formElement.querySelectorAll(installation.inputSelector));
-        const errorList = (this._formSelector.querySelectorAll(this.errorSelector));
-        //const buttonEl = (formElement.querySelector(installation.submitButtonSelector));
-        for (const inputElement of this.inputList) {
-            if (inputElement.classList.contains(this.inputErrorClass)) {
-                inputElement.classList.remove(this.inputErrorClass);
-            }
-        }
-        for (const errorElement of errorList) {
-            if (errorElement.classList.contains(this.errorClass)) {
-                errorElement.classList.remove(this.errorClass);
-            }
-        }
-        if (this.buttonEl.classList.contains(this.inactiveButtonClass)) {
-            this.buttonEl.classList.remove(this.inactiveButtonClass);
-            this.buttonEl.disabled = false;
-        }
-    }
+    resetValidation() {
+        this._toggleButtonState();
 
+        this.inputList.forEach((inputElement) => {
+            this._hideInputError(inputElement);
+        });
+    }
+    
     /*Проверка валидности полей.*/
     _checkInputValidity(inputElement) {
         if (!inputElement.validity.valid) {
@@ -65,14 +52,14 @@ export class FormValidator {
 
     _hideInputError(inputElement) {
         const errorElement = this._formSelector.querySelector(`.${inputElement.id}${this.frErrorSelector}`);
-        inputElement.classList.remove(this.inputErrorClas);
+        inputElement.classList.remove(this.inputErrorClass);
         errorElement.classList.remove(this.errorClass);
         errorElement.textContent = '';
     };
 
     /* Работа с кнопками*/
     _toggleButtonState() {
-        console.log('submit');
+
         if (this._hasInvalidInput()) {
             this.buttonEl.classList.add(this.inactiveButtonClass);
             this.buttonEl.disabled = true;
@@ -96,18 +83,7 @@ export class FormValidator {
 
     /*активация валидации*/
 
-    /*enableValidation() {
-        const formList = Array.from(document.querySelectorAll(this.inputSelector));
-        formList.forEach((formElement) => {
-            const fieldsetList = Array.from(formElement.querySelectorAll(this.fieldSetElement));
-            fieldsetList.forEach((fieldset) => {
-                this._setEventListeners(fieldset);
-            });
-        });
-    };*/
-
     enableValidation() {
-        this._resetValidation();
         this._setEventListeners();
     }
 }
