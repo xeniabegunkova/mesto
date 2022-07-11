@@ -117,7 +117,6 @@ editButton.addEventListener('click', function () {
     openPopup(popupEditProfile);
     nameEditElement.value = titleEditElement.textContent;
     workEditElement.value = careerEditElemnt.textContent;
-    console.log(popupEditProfileName);
     formValidity[popupEditProfileName].resetValidation();
 });
 
@@ -136,7 +135,6 @@ editForm.addEventListener('submit', function (e) {
 
 popupAddButton.addEventListener('click', function () {
     openPopup(popupAddCard);
-    console.log(popupAddCardName);
     formValidity[popupAddCardName].resetValidation();
 });
 
