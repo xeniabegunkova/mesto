@@ -1,9 +1,9 @@
 export class Card {
-    constructor(information, selector, openPhoto) {
+    constructor(information, selector, handleCardClick) {
         this._name = information.name;
         this._link = information.link;
         this._selector = selector;
-        this._openPhoto = openPhoto;
+        this._handleCardClick = handleCardClick;
     }
 
     _takeTemplate() {
@@ -28,7 +28,7 @@ export class Card {
 
     _setImageListener() {
         const image = this.element.querySelector(".photos__grid");
-        image.addEventListener('click', () => this._openPhoto(this._name, this._link));
+        image.addEventListener('click', () => { this._handleCardClick(this._name, this._link) });
     }
 
     _setLikeListener() {
@@ -45,7 +45,7 @@ export class Card {
         buttonDelete.addEventListener("click", () => this._removeCard(buttonDelete));
     }
 
-    _removeCard(item) {
+    _removeCard() {
         this.element.remove();
     };
 
@@ -53,7 +53,7 @@ export class Card {
     generateCard() {
         this.element = this._takeTemplate();
 
-        this._setLayOut()
+        this._setLayOut();
         this._setImageListener();
         this._setLikeListener();
         this._setDeleteListener();
