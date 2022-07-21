@@ -1,12 +1,12 @@
-import '../pages/index.css'; 
+import './index.css';
 
-import { initialCards } from '../scripts/cards.js';
-import { Card } from '../scripts/Card.js';
-import { FormValidator } from '../scripts/FormValidator.js';
-import { Section } from '../scripts/Section.js';
-import { UserInfo } from '../scripts/UserInfo.js';
-import { PopupWithForm } from '../scripts/PopupWithForm.js';
-import { PopupWithImage } from '../scripts/PopupWithImage.js';
+import { initialCards } from '../components/cards.js';
+import { Card } from '../components/Card.js';
+import { FormValidator } from '../components/FormValidator.js';
+import { Section } from '../components/Section.js';
+import { UserInfo } from '../components/UserInfo.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithImage } from '../components/PopupWithImage.js';
 
 const installation = {
     formSelector: '.popup__form',
@@ -34,44 +34,24 @@ const enableValidation = () => {
 
 /*for editButton*/
 const editButton = document.querySelector('.profile__edit-button');
-//const popupEditProfile = document.querySelector('#change-profile-popup');
-const closeEditButton = document.querySelector('.popup__close');
 const titleEditElement = document.querySelector('.profile__name');
 const nameEditElement = document.querySelector('.popup__input_sign_name');
 const careerEditElemnt = document.querySelector('.profile__career');
 const workEditElement = document.querySelector('.popup__input_sign_extra');
-const popups = document.querySelectorAll('.popup');
-const formIncludesToEdit = document.querySelector('.popup__form_includes-to_edit');
 const editForm = document.querySelector('#editForm');
 const popupEditProfileName = editForm.getAttribute('name');
 
 /*for addButtoon*/
 const popupAddButton = document.querySelector('.profile__add-button');
-const closeAddButton = document.querySelector('#close-button')
 const formAddСard = document.querySelector('#popup-form-card');
 const popupAddCardName = formAddСard.getAttribute('name');
-const photoAddButton = document.querySelector('.popup__button');
-
-/*добавление новых карточек */
-const titleNewCard = document.querySelector('.popup__input_sign_appellation');
-const linkNewCard = document.querySelector('.popup__input_sign_link');
 
 /*add cards*/
 const photosList = document.querySelector('.photos__list');
 
-/*open cards*/
-
-const imageElement = document.querySelector('.popup_item');
-const imageClose = document.querySelector('#close-button-item');
-const popupImage = document.querySelector('.popup__image');
-const imageTitle = document.querySelector('.popup__title-image');
-
 /*для Кард.джс*/
 
-const inputLocality = document.querySelector('.popup__input_sign_appellation');
-const inputLink = document.querySelector('.popup__input_sign_link');
 const cardTemplate = '#photos-template';
-
 
 /*UserInfo class*/
 
@@ -85,6 +65,7 @@ const popupWithEditForm = new PopupWithForm({
     selector: popupEditProfile,
     callbackSubmitForm: (formData) => {
         userInfo.setUserInfo(formData)
+        popupWithEditForm.close();
     }
 });
 
@@ -106,10 +87,9 @@ const popupAddCard = '#change-card-popup';
 const popupWithAddCardsForm = new PopupWithForm({
     selector: popupAddCard,
     callbackSubmitForm: (formData) => {
-        const card = new Card(formData, cardTemplate, handleCardClick);
-        console.log(formData);
-        const createdCard = card.generateCard();
+        const createdCard = createCard(formData)
         cards.addItem(createdCard);
+        popupWithAddCardsForm.close();
     }
 })
 popupWithAddCardsForm.setEventListeners();
@@ -141,14 +121,20 @@ const handleCardClick = (name, link) => {
 const cards = new Section({
     items: initialCards,
     renderer: (item) => {
-        const card = new Card(item, cardTemplate, handleCardClick);
-        const createdCard = card.generateCard();
+        const createdCard = createCard(item);;
         cards.addItem(createdCard);
-
-        //return cards
     }
 }, photosList
 );
+
+//создаем экземпляр карточки, чтобы не дублировался код
+
+const createCard = (item) => {
+    const card = new Card(item, cardTemplate, handleCardClick);
+    const createdCard = card.generateCard();
+
+    return createdCard;
+}
 
 cards.renderItems();
 

@@ -19,7 +19,7 @@ export class PopupWithForm extends Popup {
         return this._inputValues;
     }
 
-    сlose() {
+    close() {
         super.close(); //копируем закрытие из класса попап
         this._popupForm.reset(); //делаем ресет формы
     }
@@ -29,8 +29,7 @@ export class PopupWithForm extends Popup {
         this._popupForm.addEventListener('submit', (e) => {
             e.preventDefault();
             this._callbackSubmitForm(this._getInputValues());
-            this.close();
-            this._popupForm.reset(); 
+            //this.close();
         })
     }
 }
