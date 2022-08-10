@@ -77,10 +77,10 @@ export class Card {
 
     _setDeleteListener() {
         this.buttonDelete = this.element.querySelector(".photos__delete");
-        this.buttonDelete.addEventListener("click", () => { this._handleDeleteCard(this._id, this.element) });
+        this.buttonDelete.addEventListener("click", () => { this._handleDeleteCard(this) });
     }
 
-    _removeCard() {
+    removeCard() {
         this.element.remove();
         this.element = null;
     };

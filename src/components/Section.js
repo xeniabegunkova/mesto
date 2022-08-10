@@ -18,8 +18,4 @@ export class Section {
             this._renderer(item);
         })
     }
-
-    removeCards(element) {
-        element.remove();
-    }
 }

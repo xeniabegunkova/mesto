@@ -1,7 +1,7 @@
 export class Popup {
     constructor({ selector }) {
         this.popup = document.querySelector(selector);
-        
+
         this.popupClose = this.popup.querySelector('.popup__close')
     }
 
@@ -21,20 +21,13 @@ export class Popup {
         }
     }
 
-    _handleCloseClick() {
-        this.popup.addEventListener('mousedown', (e) => {
-            const container = this.popup.querySelector('.popup__content')
-            const click = e.composedPath().includes(container)
-            if (!click) {
-                this.close()
+    setEventListeners() {
+        this.popup.addEventListener('mousedown', e => {
+            if ((e.target === e.currentTarget) // отвечает за закрытие по оверлею
+                || (e.target === this.popupClose)) //отвечает за закрытие по крестику
+            {
+                this.close();
             }
         })
-    }
-
-    setEventListeners() {
-        this.popupClose.addEventListener('click', () => {
-            this.close(this.popup)
-        })
-        this._handleCloseClick();
     }
 }

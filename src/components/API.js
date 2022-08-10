@@ -12,7 +12,7 @@ export class API {
             return res.json();
         }
 
-        throw new Error('Ошибка при загрузке данных');
+        return Promise.reject(`Ошибка: ${res.status}`);
     }
 
     _getHeaders() {
