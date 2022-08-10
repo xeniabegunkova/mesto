@@ -1,9 +1,18 @@
 export class Card {
-    constructor(information, selector, handleCardClick) {
+    constructor(information, selector, handleCardClick, userId, handleDeleteCard, { handleSetLike, handleDeleteLike }) {
         this._name = information.name;
         this._link = information.link;
+        this._likes = information.likes;
         this._selector = selector;
+        this._id = information._id;
+        this._ownerId = information.owner._id;
+        this._information = information;
+        this._handleSetLike = handleSetLike;
+        this._handleDeleteLike = handleDeleteLike;
+        this.userId = userId;
+
         this._handleCardClick = handleCardClick;
+        this._handleDeleteCard = handleDeleteCard;
     }
 
     _takeTemplate() {
@@ -13,59 +22,92 @@ export class Card {
             .querySelector('.photos__container')
             .cloneNode(true);
 
-            return createdCard;
+        return createdCard;
     }
 
     _setLayOut() {
-        const image = this.element.querySelector(".photos__grid");
+        this.image = this.element.querySelector(".photos__grid");
 
         this.element.querySelector(".photos__title").textContent = this._name;
-        image.src = this._link;
+        this.image.src = this._link;
 
-        image.setAttribute("alt", `${this._name}`);
-        image.setAttribute("src", `${this._link}`);
+        this.image.setAttribute("alt", `${this._name}`);
+        this.image.setAttribute("src", `${this._link}`);
     }
 
     _setImageListener() {
-        const image = this.element.querySelector(".photos__grid");
-        image.addEventListener('click', () => { this._handleCardClick(this._name, this._link) });
+        this.image = this.element.querySelector(".photos__grid");
+        this.image.addEventListener('click', () => { this._handleCardClick(this._name, this._link) });
+    }
+
+    _checkButtonLike() {
+        if(this._likes.some((information) => { //здесь хотим проверить, удовлетворяет ли какой-то эл-т из массива, условию, которое мы передаем в функции
+            return information._id === this.userId //здесь проверяем условие: если айди картинки равно нашему айди, то
+        })) {
+            this.like.classList.toggle('photos__like_active') //ставим активный лайк
+        }
+    }
+
+    likesCount(likes) {
+        this.numLikes.textContent = likes.length;
+    }
+
+    activeLike() {
+        this.like.classList.add('photos__like_active');
+    }
+
+    noLike() {
+        this.like.classList.remove('photos__like_active');
     }
 
     _setLikeListener() {
-        const like = this.element.querySelector(".photos__like");
-        like.addEventListener("click", () => this._changeLikeStatus(like));
+        this.like.addEventListener("click", () => {
+            if(this.like.classList.contains('photos__like_active')) {
+                this._handleDeleteLike();
+                this.noLike()
+            }
+            else {
+                this._handleSetLike();
+                this.activeLike;
+                
+            }
+        }
+        )
     }
 
-    _changeLikeStatus(item) {
-        item.classList.toggle('photos__like_active');
-    };
-
     _setDeleteListener() {
-        const buttonDelete = this.element.querySelector(".photos__delete");
-        buttonDelete.addEventListener("click", () => this._removeCard(buttonDelete));
+        this.buttonDelete = this.element.querySelector(".photos__delete");
+        this.buttonDelete.addEventListener("click", () => { this._handleDeleteCard(this._id, this.element) });
     }
 
     _removeCard() {
         this.element.remove();
+        this.element = null;
     };
 
+    _checkButtonDelete() {
+        if (this._ownerId !== this.userId) {
+            this.buttonDelete = this.element.querySelector(".photos__delete");
+            this.buttonDelete.remove();
+        }
+    }
 
     generateCard() {
         this.element = this._takeTemplate();
+
+        this.numLikes = this.element.querySelector('.photos__like-number');
+        this.numLikes.textContent = this._likes.length
+
+        //ищу класс подсчета лайков
+        this.like = this.element.querySelector(".photos__like");
 
         this._setLayOut();
         this._setImageListener();
         this._setLikeListener();
         this._setDeleteListener();
+        this._checkButtonDelete();
+        this._checkButtonLike();
 
         return this.element;
     }
 }
-
-
-
-/*Можно лучше (исправить): 
-1. Элементы нужно запомнить в поле класса в методе создания карточки или в конструкторе, 
-тогда можно будет обращаться к элементам через поле класса, а не искать каждый раз, когда нужно обратиться к элементу. 
-Например, this._image = this._element.querySelector(…);
-2. В метод this._removeCard ничего не передается (посмотреть 45 строчку кода)*/

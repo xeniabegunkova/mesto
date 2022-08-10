@@ -1,22 +1,25 @@
 export class Section {
-    constructor({ items, renderer }, containerSelector) { //тренажер. урок 3-6
+    constructor({ items, renderer }, containerSelector) {
         this._renderedItems = items;
         this._renderer = renderer;
         this._containerSelector = containerSelector
     }
 
-    renderItems() {
-        this._renderedItems.forEach((item) => {
+    addItemPrepend(element) {
+        this._containerSelector.prepend(element);
+    }
+
+    addItemAppend(element) {
+        this._containerSelector.append(element)
+    }
+
+    renderItems(items) {
+        items.forEach((item) => {
             this._renderer(item);
         })
     }
 
-    addItem(element) {
-        this._containerSelector.prepend(element);
+    removeCards(element) {
+        element.remove();
     }
 }
-
-/* Посмотреть потом (можно лучше):
-Лучше массив карточек передавать не как параметр конструктора, а как параметр метода renderItems. 
-Это пригодится в следующем спринте, когда данные будут приходить с сервера и для их отображения можно 
-будет вызвать cardsSection.renderItems(cards), передав полученные данные как параметр метода.*/

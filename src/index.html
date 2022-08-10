@@ -20,6 +20,7 @@
       <section class="profile">
         <div class="profile__information">
           <div class="profile__avatar">
+            <button type="button" class="profile__avatar-redactor"></button>
             <img
               src="<%=require('./images/kusto.jpg')%>"
               alt="Аватар"
@@ -37,7 +38,8 @@
           </div>
         </div>
         <button class="profile__add-button" type="button" aria-label="Добавить">
-          <img src="<%=require('./images/Vector.svg')%>"
+          <img
+            src="<%=require('./images/Vector.svg')%>"
             class="profile__pic"
             alt="Кнопка плюс"
           />
@@ -96,7 +98,7 @@
               />
               <span class="popup__input-error career-input-error"></span>
             </label>
-            <button type="submit" class="popup__button" disabled>
+            <button type="submit" class="popup__button popup__button-wait" disabled>
               Сохранить
             </button>
           </fieldset>
@@ -146,33 +148,13 @@
               />
               <span class="popup__input-error link-input-error"></span>
             </label>
-            <button type="submit" class="popup__button" disabled>
+            <button type="submit" class="popup__button popup__button-wait" disabled>
               Создать
             </button>
           </fieldset>
         </form>
       </div>
     </div>
-
-    <!--added photos with help of js-->
-    <template id="photos-template">
-      <article class="photos__container">
-        <img class="photos__grid" src="#" alt="" />
-        <button
-          class="photos__delete"
-          type="button"
-          aria-label="Удалить"
-        ></button>
-        <div class="photos__information">
-          <h2 class="photos__title"></h2>
-          <button
-            class="photos__like"
-            type="button"
-            aria-label="Нравится"
-          ></button>
-        </div>
-      </article>
-    </template>
 
     <!--open popup photos-->
     <div class="popup popup_item">
@@ -188,7 +170,76 @@
       </div>
     </div>
 
-    <script type="module" src="./pages/index.js"></script>
+    <!--deletion request popup-->
+    <div class="popup popup_delete_card">
+      <div class="popup__content popup__content_delete_card">
+        <h2 class="popup__title popup__title_delete">Вы уверены?</h2>
+        <form class="popup__form" id="deleteForm">
+          <button class="popup__button popup__button-wait" type="submit" id="deleteButton">
+            Да
+          </button>
+        </form>
+        <button
+          class="popup__close"
+          type="button"
+          id="deleteCloseButton"
+          aria-label="Закрыть"
+        ></button>
+      </div>
+    </div>
 
+    <!--change avatar popup-->
+    <div class="popup popup_change-avatar">
+      <div class="popup__content popup__content_change-avatar">
+        <h2 class="popup__title popup__title-avatar">Обновить аватар</h2>
+        <form class="popup__form" id="changePopupForm" name="changeAvatar" novalidate>
+          <label class="popup__field">
+            <input
+              class="popup__input popup__input-avatar"
+              id="avatar"
+              name="avatar"
+              type="url"
+              placeholder="Введите ссылку"
+              required
+            />
+            <span class="popup__input-error avatar-input-error"></span>
+          </label>
+          <button type="submit" class="popup__button popup__button-wait">
+            Сохранить
+          </button>
+        </form>
+        <button
+          class="popup__close"
+          type="button"
+          id="avatarCloseButton"
+          aria-label="Закрыть"
+        ></button>
+      </div>
+    </div>
+
+    <!--added photos with help of js-->
+    <template id="photos-template">
+      <article class="photos__container">
+        <img class="photos__grid" src="#" alt="" />
+        <button
+          class="photos__delete"
+          type="button"
+          aria-label="Удалить"
+        ></button>
+        <div class="photos__information">
+          <h2 class="photos__title"></h2>
+          <div class="photos__like-container">
+            <button
+              class="photos__like"
+              type="button"
+              aria-label="Нравится"
+            ></button>
+            <p class="photos__like-number"></p>
+          </div>
+        </div>
+      </article>
+    </template>
+
+    <script type="module" src="./pages/index.js"></script>
   </body>
 </html>
