@@ -98,24 +98,20 @@ const createCard = (item) => {
             api.likeCard(item._id)
                 .then((res) => {
                     card.likesCount(res.likes);
+                    card.activeLike();
                 })
                 .catch((err) => {
                     console.log(err);
-                })
-                .finally(() => {
-                    card.activeLike();
                 })
         },
         handleDeleteLike: () => {
             api.nolikeCard(item._id)
                 .then((res) => {
                     card.likesCount(res.likes);
+                    card.noLike();
                 })
                 .catch((err) => {
                     console.log(err);
-                })
-                .finally(() => {
-                    card.noLike();
                 })
         }
     });
